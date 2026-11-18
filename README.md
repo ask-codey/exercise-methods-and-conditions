@@ -4,11 +4,20 @@ Exercise code for the lesson **Exercise: Methods and Conditions** in the C# Full
 
 Three small businesses need your help. Each one is a class of methods in the `MethodsExercise` project:
 
-- `BackyardBasketball.cs`: winning percentages, points scored, and shots needed
+- `BackyardBasketball.cs`: winning percentages, points scored, shots needed, and keeping score
 - `ClairesCookies.cs`: cookie orders, prices and sales tax
 - `ElliotsYardCare.cs`: a lawn business's costs, profits, times and prices
 
 Every method returns `0` (or `""`) for now. The comment above each method says what it should return, with examples. Replace the `return` line with your own code.
+
+## Keeping score: ref and out
+
+The last two methods in `BackyardBasketball.cs` practice *Passing Values to a Method: by Value and by Reference*.
+
+- `AddBasket(ref int teamScore, bool isThree)` returns nothing. It adds 3 points to the caller's `teamScore` for a three-pointer (`isThree` is `true`), or 2 points for a two-pointer. For example, with `int score = 10;`, `AddBasket(ref score, true);` leaves `score` at `13`.
+- `TryReadScore(string text, out int score)` checks a score the scorekeeper typed. When `text` is a whole number from 0 to 200 (0 and 200 included), it returns `true` and hands the number back through `score`: `TryReadScore("42", out int score)` returns `true` with `score` at `42`. For anything else (`"forty"`, `"-5"`, `"250"`), it returns `false` and hands back `0`.
+
+For now, `AddBasket` does nothing and `TryReadScore` returns `false` with a score of `0`.
 
 ## Run it
 

@@ -44,6 +44,36 @@ public class BackyardBasketballTests
 
         Assert.AreEqual(expected, actual, $"To score {desiredScore} points making {shotPercentage}% of shots (three-pointers: {isThree}), a player needs {expected} shots.");
     }
+
+    [TestMethod]
+    [DataRow(10, true, 13)]
+    [DataRow(10, false, 12)]
+    [DataRow(0, true, 3)]
+    [DataRow(45, false, 47)]
+    public void AddBasket(int startingScore, bool isThree, int expected)
+    {
+        int teamScore = startingScore;
+
+        BackyardBasketball.AddBasket(ref teamScore, isThree);
+
+        string basket = isThree ? "a three-pointer" : "a two-pointer";
+        Assert.AreEqual(expected, teamScore, $"A team with {startingScore} points that makes {basket} has {expected} points.");
+    }
+
+    [TestMethod]
+    [DataRow("42", true, 42)]
+    [DataRow("0", true, 0)]
+    [DataRow("200", true, 200)]
+    [DataRow("forty", false, 0)]
+    [DataRow("-5", false, 0)]
+    [DataRow("250", false, 0)]
+    public void TryReadScore(string text, bool expectedResult, int expectedScore)
+    {
+        bool actual = BackyardBasketball.TryReadScore(text, out int score);
+
+        Assert.AreEqual(expectedResult, actual, $"TryReadScore(\"{text}\") returns {expectedResult}.");
+        Assert.AreEqual(expectedScore, score, $"TryReadScore(\"{text}\") hands back a score of {expectedScore}.");
+    }
 }
 
 [TestClass]
